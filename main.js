@@ -32,7 +32,7 @@ function fromLine(req, res, next) {
 		'eventType': EVENT_SEND,
 		'content': message.content
 	};
-	// sendToLine(response);
+	sendToLine(response);
 	res.send(200);
 	next();
 }
