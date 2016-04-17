@@ -46,7 +46,8 @@ server.get('/hello/:name', (req, res, next) => {
 });
 server.post('/linebot', fromLine);
 
-server.listen(8080, () => {
+var port = process.env.PORT || 3000;
+server.listen(port, () => {
 	console.log(server.name + 'listening on ' + server.url);
 });
 
