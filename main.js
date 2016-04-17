@@ -24,6 +24,7 @@ function sendToLine(data) {
 
 function fromLine(req, res, next) {
 	const EVENT_SEND = '138311608800106203';
+	console.log('Called from line');
 	let message = req.body.result[0];
 	console.dir(message.content);
 	let response = {
@@ -32,7 +33,7 @@ function fromLine(req, res, next) {
 		'eventType': EVENT_SEND,
 		'content': message.content
 	};
-	sendToLine(response);
+	// sendToLine(response);
 	res.send(200);
 	next();
 }
