@@ -25,7 +25,7 @@ function sendToLine(data) {
 function fromLine(req, res, next) {
 	const EVENT_SEND = '138311608800106203';
 	let message = req.body.result[0];
-	console.dir(message);
+	console.dir(message.content);
 	let response = {
 		'to':[ message.content.from ],
 		'toChannel': message.fromChannel,
@@ -49,6 +49,7 @@ server.post('/linebot', fromLine);
 var port = process.env.PORT || 3000;
 server.listen(port, () => {
 	console.log(server.name + 'listening on ' + server.url);
+	console.log('LINE_CHANNEL_ID: ' + LINE_CHANNEL_ID);
 });
 
 })();
