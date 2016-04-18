@@ -1,4 +1,5 @@
 var restify = require('restify');
+var builder = require('botbuilder');
 
 (function () {
 'use strict';
@@ -38,6 +39,13 @@ function fromLine(req, res, next) {
 	next();
 }
 
+var bot = new builder.BotConnectorBot({ appId: 'YourAppId', appSecret: 'YourAppSecret' });
+bot.add('/', function (session) {
+	console.log('msg: ' + session.message.text);
+	session.send('Hello World');
+});
+
+
 var server = restify.createServer();
 server.use(restify.bodyParser());
 
@@ -46,6 +54,8 @@ server.get('/hello/:name', (req, res, next) => {
 	next();
 });
 server.post('/linebot', fromLine);
+
+server.post('/api/messages', bot.verifyBotFramework(), bot.listen());
 
 var port = process.env.PORT || 3000;
 server.listen(port, () => {
